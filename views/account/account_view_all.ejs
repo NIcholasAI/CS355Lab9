@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Account - View All </title>
+</head>
+<body>
+<h1>Account</h1>
+
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>E-mail</th>
+    </tr>
+    <% for(var i =0; i <accounts.length; i++) { %>
+    <tr>
+        <td><%= accounts[i].account_id %></td>
+        <td><%= accounts[i].email %></td>
+    </tr>
+    <% } %>
+</table>
+
+</body>
+</html>
