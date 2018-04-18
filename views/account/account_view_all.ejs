@@ -10,11 +10,15 @@
     <tr>
         <th>ID</th>
         <th>E-mail</th>
+        <th>First Name</th>
+        <th>Last Name</th>
     </tr>
     <% for(var i =0; i <accounts.length; i++) { %>
     <tr>
         <td><%= accounts[i].account_id %></td>
         <td><%= accounts[i].email %></td>
+        <td><%= accounts[i].first_name%></td>
+        <td><%= accounts[i].last_name%></td>
     </tr>
     <% } %>
 </table>

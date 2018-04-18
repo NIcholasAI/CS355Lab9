@@ -4,12 +4,13 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
+var classes = require('./routes/allClasses');
 var index = require('./routes/index');
 var users = require('./routes/users');
 var company = require ('./routes/company');
 var skill = require('./routes/skill');
 var address = require('./routes/address');
+var student = require('./routes/student');
 var account = require('./routes/account');
 var app = express();
 
@@ -26,8 +27,10 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/company',company);
 app.use('/skill',skill);
+app.use('/allClasses',classes);
 app.use('/address',address);
 app.use('/account',account);
+app.use('/student', student);
 app.use('/', index);
 app.use('/users', users);
 
