@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>School - View All </title>
+</head>
+<body>
+<h1>Schools</h1>
+<a href="/school/add" > Add New School</a> <br />
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Actions</th>
+    </tr>
+    <tr>
+         <% for(var i=0; school.length > i; i++) { %>
+        <td><%=school[i].school_id%></td>
+        <td><%= school[i].school_name %></td>
+        <td>
+            <a href='/school/edit/?school_id=<%= school[i].school_id%>'>
+                Edit
+            </a>
+        </td>
+    </tr>
+    <% } %>
+</table>
+</body>
+</html>

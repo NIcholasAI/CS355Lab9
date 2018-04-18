@@ -8,16 +8,14 @@
         <a href="/company/add" > Add New Company</a> <br />
         <table border="1">
             <tr>
+                <th>ID</th>
                 <th>Name</th>
                 <th> Actions </th>
             </tr>
            <tr>
             <% for(var i=0; companies.length > i; i++) { %>
-                <td>
-                    <a href='/company/?company_id/=<%=companies[i].company_id %>'>
-                        <%= companies[i].company_name %>
-                    </a>
-                </td>
+               <td><%=companies[i].company_id%></td>
+               <td><%= companies[i].company_name %></td>
                 <td>
                     <a href='/company/edit/?company_id=<%= companies[i].company_id%>'>
                         Edit
