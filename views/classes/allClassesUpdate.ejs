@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Classes - Update</title>
+</head>
+<body>
+<h1>Update Classes</h1>
+<form action="/allClasses/update" method="get">
+    <input type="hidden"
+           id="class_id"
+           name="class_id"
+           value="<%=classes.class_id%>"
+    />
+    Class Name:
+    <input
+            id="className"
+            name="className"
+            type="text"
+            value="<%=classes.className%>"
+    />
+
+    Grade:
+    <input
+            id="grade"
+            name="grade"
+            type="text"
+            value="<%=classes.grade%>"
+    />
+    Completed:
+    <input
+        id="taken"
+        name="taken"
+        type="checkbox"
+        value="<%classes.taken%>"
+    />
+    <br/>
+    <input type="submit"/>
+
+</form>
+</body>
+</html>

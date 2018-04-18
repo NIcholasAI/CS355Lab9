@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student - Update</title>
+</head>
+<body>
+<h1>Update Student</h1>
+<form action="/student/update" method="get">
+    <input type="hidden"
+           id="student_id"
+           name="student_id"
+           value="<%=students.student_id%>"
+    />
+    Frist Name:
+    <input
+            id="first_name"
+            name="first_name"
+            type="text"
+            value="<%=students.first_name%>"
+    />
+    Last Name:
+    <input
+            id="last_name"
+            name="last_name"
+            type="text"
+            value="<%=students.last_name%>"
+    />
+    Student Number:
+    <input
+        id="student_number"
+        name="student_number"
+        type="text"
+        value="<%=students.student_number%>"
+    />
+    <br/>
+    <input type="submit"/>
+
+</form>
+</body>
+</html>

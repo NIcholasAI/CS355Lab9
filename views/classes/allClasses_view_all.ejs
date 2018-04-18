@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Classes - View All </title>
+</head>
+<body>
+<h1>Classes</h1>
+<a href="/allClasses/add" > Add New Class</a> <br />
+<table border="1">
+    <tr>
+        <th>Class ID</th>
+        <th>Class Name</th>
+        <th>Grade</th>
+        <th>Taken</th>
+        <th>Actions</th>
+    </tr>
+    <tr>
+        <% for(var i =0; i <classes.length; i++) { %>
+        <td><%= classes[i].class_id %></td>
+        <td><%= classes[i].className %></td>
+        <td><%= classes[i].grade%></td>
+        <td><%= classes[i].taken%></td>
+        <td><a href='/allClasses/edit/?class_id=<%= classes[i].class_id%>'>
+                Edit
+            </a>
+        </td>
+    </tr>
+    <% } %>
+</table>
+
+</body>
+</html>
