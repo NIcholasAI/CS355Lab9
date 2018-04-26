@@ -40,7 +40,7 @@ router.get('/edit', function(req,res){
     school_dal.getinfo(req.query.school_id, function(err,result){
         if(err){res.send(err);}
         else {
-            res.render('school/schoolUpdate',{school: result[0][0],address_result:result[0]});
+            res.render('school/schoolUpdate',{school: result[0][0],address_result:result[1]});
         }
     });
 });

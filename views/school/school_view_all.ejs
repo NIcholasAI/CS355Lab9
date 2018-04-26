@@ -14,8 +14,9 @@
     </tr>
     <tr>
          <% for(var i=0; school.length > i; i++) { %>
-        <td><%=school[i].school_id%></td>
+        <td><%= school[i].school_id %></td>
         <td><%= school[i].school_name %></td>
+
         <td>
             <a href='/school/edit/?school_id=<%= school[i].school_id%>'>
                 Edit

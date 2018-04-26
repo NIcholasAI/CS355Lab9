@@ -23,31 +23,31 @@ exports.insert = function (params,callback){
     var queryData = [params.email];
 
     connection.query(query,queryData, function(err, result){
-        if(err || params.address_id === undefined){
+        if(err || params.account_id === undefined){
             console.log(err);
             callback(err,result);
         } else {
-            var address_id = result.insertId;
-            var query = 'INSERT INTO address (address_id) VALUES ?';
-            // AddressData is a multidimensional array of values.
-            var AddressData =[];
-            if (params.address_id.constructor === Array){
-                for(var i=0; i< params.address_id.length; i++){
-                    companyAddressData.push([address_id,params.address_id[i]]);
+            var account_id = result.insertId;
+            var query = 'INSERT INTO account (account_id) VALUES ?';
+            // AccountData is a multidimensional array of values.
+            var AccountData =[];
+            if (params.account_id.constructor === Array){
+                for(var i=0; i< params.account_id.length; i++){
+                    AccountData.push([account_id,params.account_id[i]]);
                 }
             } else {
-                companyAddressData.push([address_id,params.address_id]);
+                AccountData.push([account_id,params.account_id]);
             }
-            connection.query(query,[AddressData],function (err,result){ callback(err,result);
+            connection.query(query,[AccountData],function (err,result){ callback(err,result);
             });
         }
     });
 };
 
 // getinfo
-exports.getinfo = function(address_id, callback){
-    var query = 'CALL address_getinfo(?)';
-    var queryData = [address_id];
+exports.getinfo = function(account_id, callback){
+    var query = 'CALL account_getinfo(?)';
+    var queryData = [account_id];
 
     connection.query(query,queryData,function (err, result) {
         callback(err,result);
@@ -56,26 +56,26 @@ exports.getinfo = function(address_id, callback){
 };
 //update
 exports.update = function (params, callback) {
-    var query = 'UPDATE address SET street = ?, zip_code = ? WHERE address_id = ? ';
+    var query = 'UPDATE account SET email = ?, first_name = ?, last_name = ? WHERE account_id = ? ';
 
-    var queryData = [params.street,params.zip_code, params.address_id];
+    var queryData = [params.email,params.first_name, params.last_name, params.account_id];
     connection.query(query,queryData, function (err, result) {
         callback (err, result);
     });
 };
 
 // insert new
-var NewAddressInsert = function (address_id, addressIdArray,callback){
-    var query = 'INSERT INTO address (address_id) VALUES = ?';
-    var NewAddressData = [];
-    if (addressIdArray.constructor === Array){
-        for (var i=0; i < addressIdArray.length; i++){
-            NewAddressData.push([address_id, addressIdArray[i]]);
+var NewAccountInsert = function (account_id, accountIdArray,callback){
+    var query = 'INSERT INTO account (account_id) VALUES = ?';
+    var NewAccountData = [];
+    if (accountIdArray.constructor === Array){
+        for (var i=0; i < accountIdArray.length; i++){
+            NewAccountData.push([account_id, accountIdArray[i]]);
         }
     }else{
-        NewAddressData.push([address_id,addressIdArray]);
+        NewAccountData.push([account_id,accountIdArray]);
     }
-    connection.query(query,[NewAddressData],function (err,result) {
+    connection.query(query,[NewAccountData],function (err,result) {
         callback(err,result);
     });
 };

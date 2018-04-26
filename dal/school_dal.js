@@ -13,29 +13,13 @@ exports.getAll = function (callback) {
 };
 
 exports.insert = function (params,callback){
-    var query = 'INSERT INTO school (school_name) VALUES (?)';
+    var query = 'INSERT INTO school (school_name,address_id) VALUES (?,?)';
 
-    var queryData = [params.school_name];
+    var queryData = [params.school_name,params.address_id];
 
-    connection.query(query,queryData, function(err, result){
-        if(err || params.address_id === undefined){
-            console.log(err);
-            callback(err,result);
-        } else {
-            var school_id = result.insertId;
-            var query = 'INSERT INTO school (school_id, address_id) VALUES ?';
-            var schoolAddressData =[];
-            if (params.address_id.constructor === Array){
-                for(var i=0; i< params.address_id.length; i++){
-                    schoolAddressData.push([school_id,params.address_id[i]]);
-                }
-            } else {
-                schoolAddressData.push([school_id,params.address_id]);
-            }
-            connection.query(query,[schoolAddressData],function (err,result){ callback(err,result);
+    connection.query(query,queryData, function(err, result)
+    { callback(err,result);
             });
-        }
-    });
 };
 exports.getinfo = function(school_id, callback){
     var query = 'CALL school_getinfo(?)';
@@ -46,30 +30,28 @@ exports.getinfo = function(school_id, callback){
 
     });
 };
+//update
+exports.update = function (params, callback) {
+    var query = 'UPDATE school SET school_name = ?, address_id = ? WHERE school_id = ? ';
 
-var schoolAddressInsert = function (school_id, addressIdArray,callback){
-    var query = 'INSERT INTO school (school_id, address_id) VALUES ?';
-    var schoolAddressData = [];
-    if (addressIdArray.constructor === Array){
-        for (var i=0; i < addressIdArray.length; i++){
-            schoolAddressData.push([school_id, addressIdArray[i]]);
-        }
-    }else{
-        schoolAddressData.push([school_id,addressIdArray]);
-    }
-    connection.query(query,[schoolAddressData],function (err,result) {
-        callback(err,result);
+    var queryData = [params.school_name,params.address_id, params.school_id];
+    connection.query(query,queryData, function (err, result) {
+        callback (err, result);
     });
 };
 
-
-exports.update = function (params, callback) {
-    var query = 'UPDATE school SET school_name = ? WHERE school_id = ? ';
-
-    var queryData = [params.school_name, params.school_id];
-    connection.query(query,queryData, function (err, result) {
-        schoolAddressUpdate(params.school_id, params.address_id, function (err, result) {
-            callback (err, result);
-        });
+// insert new
+var NewSchoolInsert = function (school_id, schoolIdArray,callback){
+    var query = 'INSERT INTO school (school_name,address_id) VALUES (?,?)';
+    var NewSchoolData = [];
+    if (schoolIdArray.constructor === Array){
+        for (var i=0; i < schoolIdArray.length; i++){
+            NewSchoolData.push([school_id, schoolIdArray[i]]);
+        }
+    }else{
+        NewSchoolData.push([school_id,schoolIdArray]);
+    }
+    connection.query(query,[NewSchoolData],function (err,result) {
+        callback(err,result);
     });
 };
