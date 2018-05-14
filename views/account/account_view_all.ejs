@@ -5,6 +5,15 @@
 </head>
 <body>
 <h1>Account</h1>
+
+<% if(locals.was_successful){%>
+<div>
+    <div id="message">
+        <%= account.email %> was successfully deleted.
+    </div>
+</div>
+<% }%>
+
 <a href="/account/add" > Add New Account</a> <br />
 <table border="1">
     <tr>
@@ -12,7 +21,8 @@
         <th>E-mail</th>
         <th>First Name</th>
         <th>Last Name</th>
-        <th>Actions</th>
+        <th>Edit</th>
+        <th>Delete</th>
     </tr>
     <% for(var i =0; i <account.length; i++) { %>
     <tr>
@@ -22,6 +32,11 @@
         <td><%= account[i].last_name%></td>
         <td><a href='/account/edit/?account_id=<%= account[i].account_id%>'>
                 Edit
+            </a>
+        </td>
+        <td>
+            <a href='/account/delete/?account_id=<%= account[i].account_id%>'>
+                Delete
             </a>
         </td>
     </tr>

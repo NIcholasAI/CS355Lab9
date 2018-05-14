@@ -3,6 +3,7 @@ var router = express.Router();
 var school_dal = require('../dal/school_dal');
 var address_dal = require('../dal/address_dal');
 /* GET users listing. */
+
 router.get('/all', function(req,res,next) {
     school_dal.getAll(function (err,result) {
         if (err){

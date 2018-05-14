@@ -5,6 +5,13 @@
 </head>
 <body>
 <h1>Skill</h1>
+<% if(locals.was_successful){%>
+<div>
+    <div id="message">
+        <%= skills.skill_name %> was successfully deleted.
+    </div>
+</div>
+<% }%>
 <a href="/skill/add" > Add New Skill</a> <br />
 <table border="1">
     <tr>
@@ -19,6 +26,9 @@
         <td><%= skills[i].description%></td>
         <td><a href='/skill/edit/?skill_id=<%= skills[i].skill_id%>'>
                 Edit
+            </a>
+            &nbsp; <a href='/skill/delete/?skill_id=<%= skills[i].skill_id%>'>
+                Delete
             </a>
         </td>
     </tr>

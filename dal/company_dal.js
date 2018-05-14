@@ -91,3 +91,13 @@ exports.getinfo = function(company_id, callback){
             });
         });
     };
+
+exports.delete = function(company_id, callback){
+    var query = 'DELETE FROM company WHERE company_id = ?';
+    var queryData = [company_id];
+
+    connection.query(query,queryData,function (err, result) {
+        callback(err,company_id);
+
+    });
+};

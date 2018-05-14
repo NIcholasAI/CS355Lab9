@@ -10,7 +10,7 @@ router.get('/all', function(req,res,next) {
             res.send(err);
         } else {
             console.log(result);
-            res.render('account/account_view_all',{account: result[0]});
+            res.render('account/account_view_all',{account: result[0],was_successful:req.query.was_successful});
         }
     })
 });
@@ -48,5 +48,17 @@ router.get('/update',function (req,res) {
         }
     });
 });
+
+router.get('/delete',function (req,res) {
+    account_dal.delete(req.query.account_id,function(err,account_id){
+
+        if(err){
+            res.send(err);
+        }else {
+            res.redirect(302, '/account/all?account_id=' + account_id + '&was_successful=1');
+        }
+    });
+});
+
 
 module.exports = router;

@@ -8,7 +8,7 @@ router.get('/all', function(req,res) {
         if (err){
             res.send(err);
         } else {
-            res.render('address/address_view_all',{address: result[0]});
+            res.render('address/address_view_all',{address: result[0],was_successful:req.query.was_successful});
         }
     });
 });
@@ -46,5 +46,18 @@ router.get('/update',function (req,res) {
         }
     });
 });
+
+router.get('/delete',function (req,res) {
+    address_dal.delete(req.query.address_id,function(err,address_id){
+
+        if(err){
+            res.send(err);
+        }else {
+            res.redirect(302, '/address/all?address_id=' + address_id + '&was_successful=1');
+        }
+    });
+});
+
+
 
 module.exports = router;

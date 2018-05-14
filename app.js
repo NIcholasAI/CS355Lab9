@@ -13,6 +13,7 @@ var address = require('./routes/address');
 var student = require('./routes/student');
 var account = require('./routes/account');
 var school = require('./routes/school');
+var resume = require('./routes/resume');
 var app = express();
 
 // view engine setup
@@ -33,6 +34,7 @@ app.use('/address',address);
 app.use('/account',account);
 app.use('/school',school);
 app.use('/student', student);
+app.use('/resume',resume);
 app.use('/', index);
 app.use('/users', users);
 

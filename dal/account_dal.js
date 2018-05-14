@@ -79,3 +79,13 @@ var NewAccountInsert = function (account_id, accountIdArray,callback){
         callback(err,result);
     });
 };
+
+exports.delete = function(account_id, callback){
+    var query = 'DELETE FROM account WHERE account_id = ?';
+    var queryData = [account_id];
+
+    connection.query(query,queryData,function (err, result) {
+        callback(err,account_id);
+
+    });
+};

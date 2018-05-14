@@ -10,7 +10,7 @@ router.get('/all', function(req,res,next) {
             res.send(err);
         } else {
             console.log(result);
-            res.render('skill/skill_view_all',{skills: result[0]});
+            res.render('skill/skill_view_all',{skills: result[0],was_successful:req.query.was_successful});
         }
     })
 });
@@ -45,6 +45,17 @@ router.get('/update',function (req,res) {
             res.send(err);
         } else {
             res.redirect(302, '/skill/all');
+        }
+    });
+});
+
+router.get('/delete',function (req,res) {
+    skill_dal.delete(req.query.skill_id,function(err,skill_id){
+
+        if(err){
+            res.send(err);
+        }else {
+            res.redirect(302, '/skill/all?skill_id=' + skill_id + '&was_successful=1');
         }
     });
 });

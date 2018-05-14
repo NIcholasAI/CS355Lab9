@@ -11,7 +11,7 @@ var address_dal = require('../dal/address_dal');
                 res.send(err);
             } else {
                 console.log(result);
-                res.render('company/company_view_all',{companies: result});
+                res.render('company/company_view_all',{companies: result,was_successful:req.query.was_successful});
             }
         })
     });
@@ -54,6 +54,17 @@ var address_dal = require('../dal/address_dal');
             } else {
                 res.redirect(302, '/company/all');
             }
+        });
+    });
+
+    router.get('/delete',function (req,res) {
+        company_dal.delete(req.query.company_id,function(err,company_id){
+
+        if(err){
+            res.send(err);
+        }else {
+            res.redirect(302, '/company/all?company_id=' + company_id + '&was_successful=1');
+        }
         });
     });
 

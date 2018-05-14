@@ -79,3 +79,13 @@ var NewSkillInsert = function (skill_id, skillIdArray,callback){
         callback(err,result);
     });
 };
+
+exports.delete = function(skill_id, callback){
+    var query = 'DELETE FROM skill WHERE skill_id = ?';
+    var queryData = [skill_id];
+
+    connection.query(query,queryData,function (err, result) {
+        callback(err,skill_id);
+
+    });
+};
