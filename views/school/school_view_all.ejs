@@ -5,6 +5,13 @@
 </head>
 <body>
 <h1>Schools</h1>
+<% if(locals.was_successful){%>
+<div>
+    <div id="message">
+        <%= school.school_name %> was successfully deleted.
+    </div>
+</div>
+<% }%>
 <a href="/school/add" > Add New School</a> <br />
 <table border="1">
     <tr>
@@ -20,6 +27,9 @@
         <td>
             <a href='/school/edit/?school_id=<%= school[i].school_id%>'>
                 Edit
+            </a>
+            &nbsp; <a href='/school/delete/?school_id=<%= school[i].school_id%>'>
+                Delete
             </a>
         </td>
     </tr>

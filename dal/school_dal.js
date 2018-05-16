@@ -55,3 +55,22 @@ var NewSchoolInsert = function (school_id, schoolIdArray,callback){
         callback(err,result);
     });
 };
+
+exports.delete = function(school_id, callback){
+    var query = 'DELETE FROM school WHERE school_id = ?';
+    var queryData = [school_id];
+
+    connection.query(query,queryData,function (err, result) {
+        callback(err,school_id);
+
+    });
+};
+// Listing schools in alphabetical order using Exist, group by , and order by
+exports.alphaList = function (callback) {
+    var query = 'SELECT school_name FROM school WHERE EXISTS(SELECT * From school) GROUP BY school_name ORDER BY school.school_name';
+
+    connection.query(query, function (err, result) {
+        callback(err, result);
+
+    });
+};

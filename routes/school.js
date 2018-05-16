@@ -11,7 +11,7 @@ router.get('/all', function(req,res,next) {
             res.send(err);
         } else {
             console.log(result);
-            res.render('school/school_view_all',{school: result});
+            res.render('school/school_view_all',{school: result,was_successful:req.query.was_successful});
         }
     })
 });
@@ -41,7 +41,7 @@ router.get('/edit', function(req,res){
     school_dal.getinfo(req.query.school_id, function(err,result){
         if(err){res.send(err);}
         else {
-            res.render('school/schoolUpdate',{school: result[0][0],address_result:result[1]});
+            res.render('school/schoolUpdate',{school: result[0][0],address_result:result[1], was_successful:req.query.was_successful});
         }
     });
 });
@@ -55,5 +55,30 @@ router.get('/update',function (req,res) {
         }
     });
 });
+
+router.get('/delete',function (req,res) {
+    school_dal.delete(req.query.school_id,function(err,school_id){
+
+        if(err){
+            res.send(err);
+        }else {
+            res.redirect(302, '/school/all?school_id=' + school_id + '&was_successful=1');
+        }
+    });
+});
+
+router.get('/alphaList',function (req, res) {
+        school_dal.alphaList(function (err,result) {
+            if (err){
+                console.log(err);
+                res.send(err);
+            } else {
+                console.log(result);
+                res.render('school/alphaList',{school: result});
+            }
+        })
+    });
+
+
 
 module.exports = router;

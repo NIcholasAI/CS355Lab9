@@ -5,6 +5,13 @@
 </head>
 <body>
 <h1>Classes</h1>
+<% if(locals.was_successful){%>
+<div>
+    <div id="message">
+        <%= classes.className %> was successfully deleted.
+    </div>
+</div>
+<% }%>
 <a href="/allClasses/add" > Add New Class</a> <br />
 <table border="1">
     <tr>
@@ -22,6 +29,9 @@
         <td><%= classes[i].taken%></td>
         <td><a href='/allClasses/edit/?class_id=<%= classes[i].class_id%>'>
                 Edit
+            </a>
+            &nbsp; <a href='/allClasses/delete/?class_id=<%= classes[i].class_id%>'>
+                Delete
             </a>
         </td>
     </tr>

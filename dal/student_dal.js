@@ -18,9 +18,9 @@ exports.getAll = function(callback) {
 // insert
 exports.insert = function (params,callback){
     // First insert the company...
-    var query = 'INSERT INTO student (student_number, first_name, last_name) VALUES (?)';
+    var query = 'INSERT INTO student (student_number, first_name, last_name) VALUES (?,?,?)';
 
-    var queryData = [params.student_number];
+    var queryData = [params.student_number,params.first_name,params.last_name];
 
     connection.query(query,queryData, function(err, result){
         if(err || params.student_id === undefined){
@@ -76,5 +76,24 @@ var NewStudentInsert = function (student_id, studentIdArray,callback){
     }
     connection.query(query,[NewStudentData],function (err,result) {
         callback(err,result);
+    });
+};
+
+exports.delete = function(student_id, callback){
+    var query = 'DELETE FROM student WHERE student_id = ?';
+    var queryData = [student_id];
+
+    connection.query(query,queryData,function (err, result) {
+        callback(err,student_id);
+
+    });
+};
+
+exports.studentClasses = function (callback) {
+    var query = 'SELECT DISTINCT first_name, last_name FROM student UNION SELECT DISTINCT class_id, className FROM allClasses';
+
+    connection.query(query, function (err, result) {
+        callback(err, result);
+
     });
 };

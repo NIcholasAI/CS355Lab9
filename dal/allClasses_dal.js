@@ -18,9 +18,9 @@ exports.getAll = function(callback) {
 // insert
 exports.insert = function (params,callback){
     // First insert
-    var query = 'INSERT INTO allClasses (className) VALUES (?)';
+    var query = 'INSERT INTO allClasses (className, grade) VALUES (?,?)';
 
-    var queryData = [params.className];
+    var queryData = [params.className,params.grade];
 
     connection.query(query,queryData, function(err, result){
         if(err || params.class_id === undefined){
@@ -77,5 +77,34 @@ var NewClassInsert = function (class_id, classIdArray,callback){
     }
     connection.query(query,[NewClassData],function (err,result) {
         callback(err,result);
+    });
+};
+exports.delete = function(class_id, callback){
+    var query = 'DELETE FROM allClasses WHERE class_id = ?';
+    var queryData = [class_id];
+
+    connection.query(query,queryData,function (err, result) {
+        callback(err,class_id);
+
+    });
+};
+// Showing full list of open classes for the spring 2020 semester using Joins, Having, and group by
+exports.classes_offered = function (callback) {
+    var query = 'SELECT department_name, course_name, section_number FROM department d\n' +
+        '  LEFT JOIN course c ON d.department_id = c.department_id\n' +
+        '  LEFT JOIN section s ON c.course_id = s.course_id GROUP BY c.course_name HAVING section_number >=1';
+
+    connection.query(query, function (err, result) {
+        callback(err, result);
+
+    });
+};
+// Using NOT IT to find all classes that do not have the words "Computer Science" in the title
+exports.not_cs_classes = function (callback) {
+    var query = 'SELECT className FROM allClasses WHERE className NOT IN ("Computer Science")';
+
+    connection.query(query, function (err, result) {
+        callback(err, result);
+
     });
 };

@@ -5,6 +5,13 @@
 </head>
 <body>
 <h1>Student</h1>
+<% if(locals.was_successful){%>
+<div>
+    <div id="message">
+        <%= students.first_name %> was successfully deleted.
+    </div>
+</div>
+<% }%>
 <a href="/student/add" > Add New Student</a> <br />
 <table border="1">
     <tr>
@@ -22,6 +29,9 @@
         <td><%= students[i].student_number%></td>
         <td><a href='/student/edit/?student_id=<%= students[i].student_id%>'>
                 Edit
+            </a>
+             &nbsp; <a href='/student/delete/?student_id=<%= students[i].student_id%>'>
+                Delete
             </a>
         </td>
     </tr>
